@@ -2,11 +2,11 @@ package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
 
-abstract public class Forme {
+abstract public class Shape {
 
 	protected double x,y;
 	
-	public Forme(double x, double y){
+	public Shape(double x, double y){
 		this.x=x;
 		this.y=y;
 	}

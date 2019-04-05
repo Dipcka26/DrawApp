@@ -2,7 +2,7 @@ package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class MRectangle extends Forme {
+public class MRectangle extends Shape {
 	
 	private double larg, haut;
 	

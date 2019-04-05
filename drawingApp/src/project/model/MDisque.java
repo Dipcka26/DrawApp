@@ -2,7 +2,7 @@ package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class MDisque extends Forme {
+public class MDisque extends Shape {
 
 	private double rayon;
 	
