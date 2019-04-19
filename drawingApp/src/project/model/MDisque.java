@@ -12,6 +12,7 @@ public class MDisque extends Shape {
 	}
 	
 	public double getRayon() {return this.rayon;}
+	
 	public void setRayon(double rayon) {this.rayon=rayon;}
 	
 	public boolean estDedans(double x, double y) {
