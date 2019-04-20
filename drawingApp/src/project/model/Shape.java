@@ -7,6 +7,8 @@ abstract public class Shape {
 
 	protected double x,y;
 	
+	protected boolean filled;
+	
 	protected Color color;
 	
 	public Shape(double x, double y){
@@ -24,6 +26,10 @@ abstract public class Shape {
 	public void setY(double y) {this.y=y;}
 	
 	public void setColor(Color c) {color = c;}
+	
+	public void setFilled(boolean filled) {this.filled = filled;}
+	
+	public boolean isFilled() {return filled; }
 	
 	public Color getColor() { return color;}
 	

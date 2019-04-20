@@ -22,8 +22,14 @@ public class MDisque extends Shape {
 	}
 	
 	public void draw(GraphicsContext gc) {
-		gc.setFill(this.color);
-		gc.fillOval(this.x, this.y, 2*this.rayon, 2*this.rayon);
+		if(this.isFilled()) {
+			gc.setFill(this.color);
+			gc.fillOval(this.x, this.y, 2*this.rayon, 2*this.rayon);
+		}
+		else {
+			//gc.setFill(this.color);
+			gc.strokeOval(this.x, this.y, 2*this.rayon, 2*this.rayon);
+		}
 	}
 	
 }

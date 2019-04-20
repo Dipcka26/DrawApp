@@ -24,7 +24,7 @@ public class View extends Application {
 		
 		primaryStage.setTitle("Drawing app");
 
-		Canvas drawArea = new Canvas(800, 800);
+		Canvas drawArea = new Canvas(750, 800);
 
 		GraphicsContext gc = drawArea.getGraphicsContext2D();
 		Control control = new Control(gc, drawArea.getWidth(), drawArea.getHeight());
@@ -35,7 +35,7 @@ public class View extends Application {
 
 		control.draw();
 		
-		Scene scene = new Scene(pane, 800, 800);
+		Scene scene = new Scene(pane,750, 800);
 		
 		 
 		 drawArea.setOnMousePressed(e -> control.attrape(e));
@@ -62,9 +62,10 @@ public class View extends Application {
 	 Button brush = new Button("Brush");
 	 Button save_file = new Button ("Save-File");
 	 Button load_file = new Button ("Load-File");
-	 Button fill_object = new Button ("Fill-Object");
-	 Button move_object = new Button ("Move-Object");
-	 Button reset_all = new Button("Reset-Page");
+	 Button fill_object = new Button ("Fill");
+	 Button move_object = new Button ("Move");
+	 Button reset_all = new Button("Reset");
+	 Button resize_object = new Button("Resize");
 	 
 	 brush.setOnMouseClicked(e -> control.changeMenu(e, Control.BRUSH));
 	 save_file.setOnMouseClicked(e -> control.changeMenu(e, Control.SAVE_FILE));
@@ -72,7 +73,7 @@ public class View extends Application {
 	 fill_object.setOnMouseClicked(e -> control.changeMenu(e, Control.FILL_OBJECT));
 	 move_object.setOnMouseClicked(e -> control.changeMenu(e, Control.MOVE_OBJECT));
 	 reset_all.setOnMouseClicked(e->control.changeMenu(e,Control.RESET));
-	 
+	 resize_object.setOnMouseClicked(e->control.changeMenu(e, Control.RESIZE_OBJECT));
 	 //Add Menu Fill Objects
 	 Menu menu = new Menu("Choose Form");
 	
@@ -105,6 +106,7 @@ public class View extends Application {
 	 toolBar.getItems().add(brush);
 	 toolBar.getItems().add(fill_object);
 	 toolBar.getItems().add(move_object);
+	 toolBar.getItems().add(resize_object);
 	 toolBar.getItems().add(menuBar);
 	 toolBar.getItems().add(colorPicker); 
 	 toolBar.getItems().add(reset_all);

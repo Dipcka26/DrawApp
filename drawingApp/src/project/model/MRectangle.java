@@ -22,8 +22,14 @@ public class MRectangle extends Shape {
 	}
 	
 	public void draw(GraphicsContext gc) {
-		gc.setFill(this.color);
-		gc.fillRect(this.x,this.y,this.larg,this.haut);
+		if(this.isFilled()) {
+			gc.setFill(this.color);
+			gc.fillRect(this.x,this.y,this.larg,this.haut);
+		}
+		else {
+			//gc.setFill(this.color);
+			gc.strokeRect(this.x,this.y,this.larg,this.haut);
+		}
 	}
 
 }
