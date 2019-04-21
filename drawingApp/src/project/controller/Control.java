@@ -4,6 +4,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
 import javafx.event.Event;
 import project.model.*;
 
@@ -16,6 +26,7 @@ public class Control {
 	private int formeIdx;
 	private boolean enDeplacement = false;
 	private ColorPicker colorPicker;
+	private FileChooser fc;
 
 	private boolean draw_object = false;
 	private boolean brush_activated = false;
@@ -157,6 +168,7 @@ public class Control {
 		case LOAD_FILE:
 			break;
 		case SAVE_FILE:
+			save();
 			break;
 		// case CHANGE_COLOR: setColor(getColor()); break;
 		case RESET:
@@ -221,10 +233,41 @@ public class Control {
 
 	}
 
-	public void save() {
-		fileChooserOption()
+	public void save()  {
+		File file = chooseFile();
+		String toSave = toString();
+		System.out.println(file.toString());
+		
+		if (file != null) {
+			try {
+				FileWriter openedFile = new FileWriter(file);
+				openedFile.write(toSave);
+				System.out.println(toSave);
+				//PrintWriter pw = new PrintWriter(openedFile);
+				//String[] s = toSave.split("\n");
+				/*for(int i = 0; i < s.length; i++) {
+					pw.println("pepe esto no furula ");
+				}*/
+				System.out.println("Heeeeellooo");
+				openedFile.close();
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-
+	}
+	
+	public File chooseFile() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("File");
+		File file = fileChooser.showOpenDialog(null);
+		
+		return file;
 	}
 	public String toString() {
 		String saved  ="";

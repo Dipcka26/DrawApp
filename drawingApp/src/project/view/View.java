@@ -59,17 +59,6 @@ public class View extends Application {
 	}
 	
 	
-	public File fileChooserOption(Stage stage) {
-		
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("File");
-		File file = fileChooser.showOpenDialog(stage);
-		
-		return file;		 
-		 
-	}
-	
-	
 	public void addToolbar(BorderPane pane, Control control) {
 	
 	 ToolBar toolBar = new ToolBar();
