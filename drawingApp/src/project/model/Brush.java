@@ -42,7 +42,7 @@ public class Brush {
 			x = x_koordinates.get(i);
 			y = y_koordinates.get(i);
 			gc.setStroke(c);
-			gc.setLineWidth(10);
+		//	gc.setLineWidth(10);
 			gc.strokeLine(x, y, x, y);
 		}
 	}

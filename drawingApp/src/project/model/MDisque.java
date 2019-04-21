@@ -37,7 +37,7 @@ public class MDisque extends Shape {
 			gc.setFill(this.color);
 			gc.fillOval(this.x, this.y, 2 * this.rayon, 2 * this.rayon);
 		} else {
-			// gc.setFill(this.color);
+		    gc.setStroke(this.color);
 			gc.strokeOval(this.x, this.y, 2 * this.rayon, 2 * this.rayon);
 		}
 	}

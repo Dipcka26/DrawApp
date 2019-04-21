@@ -36,6 +36,8 @@ public class Control {
 	private int object_type = 0; // RECTANCLE; DISQUE; LIGNE
 	private int modi = -1; // Tells which option the user choosed
 
+	private double BRUSH_WIDTH = 5;
+	
 	public static final int LOAD_FILE = 0;
 	public static final int SAVE_FILE = 1;
 	public static final int BRUSH = 2;
@@ -49,6 +51,8 @@ public class Control {
 	public static final int RECTANGLE = 10;
 	public static final int LIGNE = 11;
 	public static final int CERCLE = 12;
+	
+	
 
 	public Control(GraphicsContext gc, double cWidth, double cHeight) {
 		this.gc = gc;
@@ -61,15 +65,15 @@ public class Control {
 	}
 
 	public void init() {
-		// model.add(new MRectangle(50, 50, 50, 30));
-		// model.add(new MDisque(100, 100, 50));
-		// model.add(new MDisque(300, 200, 80));
+		gc.setLineWidth(BRUSH_WIDTH);
+		
 	}
 
 	public void draw() {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, this.cWidth, this.cHeight);
 
+		brush.draw(gc);
 		for (int i = 0; i < model.getSize(); i++) {
 			Shape f = model.get(i);
 			f.draw(gc);
@@ -79,15 +83,17 @@ public class Control {
 
 	public void attrape(MouseEvent e) {
 
+		
+		
 		if (draw_object) { // This code will be executed if we wanne creat a new object
 			enDeplacement = true;
 			if (RECTANGLE == object_type)
-				model.add(new MRectangle(e.getX(), e.getY(), 0, 0));
+				model.add(new MRectangle(e.getX(), e.getY(), 0, 0, getColor()));
 			else if (CERCLE == object_type)
-				model.add(new MDisque(e.getX(), e.getY(), 0));
+				model.add(new MDisque(e.getX(), e.getY(), 0,getColor()));
 			else if (LIGNE == object_type)
-				model.add(new MLigne(e.getX(), e.getY()));
-		} else {
+				model.add(new MLigne(e.getX(), e.getY(),getColor()));
+		} else if( modi == MOVE_OBJECT || modi == FILL_OBJECT){
 			for (int i = 0; i < model.getSize(); i++) {
 				Shape f = model.get(i);
 				if (f.estDedans(e.getX(), e.getY())) {
@@ -107,6 +113,9 @@ public class Control {
 			}
 
 		}
+		
+		
+		draw();
 	}
 
 	public void deplace(MouseEvent e) {
@@ -139,7 +148,7 @@ public class Control {
 				lig.set_endX(e.getX());
 				lig.set_endY(e.getY());
 			}
-		} else if (enDeplacement && brush_activated == false) {
+		} else if (enDeplacement && brush_activated == false && modi == MOVE_OBJECT) {
 			model.get(formeIdx).setX(e.getX());
 			model.get(formeIdx).setY(e.getY());
 		} else if (brush_activated)
@@ -174,7 +183,9 @@ public class Control {
 		case SAVE_FILE:
 			save();
 			break;
-		// case CHANGE_COLOR: setColor(getColor()); break;
+		case CHANGE_COLOR: 
+			setColor(getColor()); 
+			break;
 		case RESET:
 			reset();
 			break;
@@ -280,7 +291,10 @@ public class Control {
 	public void load() {
 		reset();
 		File file = chooseFile();
+		
+		if(file!=null)
 		try {
+			
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
 			String line;
@@ -306,6 +320,9 @@ public class Control {
 			e.printStackTrace();
 		} catch (IOException e) {
 			
+			e.printStackTrace();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 

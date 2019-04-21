@@ -45,7 +45,7 @@ public class MRectangle extends Shape {
 			gc.setFill(this.color);
 			gc.fillRect(this.x, this.y, this.larg, this.haut);
 		} else {
-			// gc.setFill(this.color);
+			gc.setStroke(this.color);
 			gc.strokeRect(this.x, this.y, this.larg, this.haut);
 		}
 	}

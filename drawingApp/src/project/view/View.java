@@ -102,7 +102,8 @@ public class View extends Application {
 	 control.setColorPicker(colorPicker);
 	 colorPicker.getStyleClass().add("button");
 	 colorPicker.setOnAction(e -> control.changeMenu(e, Control.CHANGE_COLOR));
-	 control.setColor(Color.RED);
+	// control.setColor(Color.RED);
+	 
 	 
 	 //Add all components
 	 toolBar.getItems().add(save_file);

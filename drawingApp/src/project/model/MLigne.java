@@ -8,10 +8,11 @@ public class MLigne extends Shape {
 	double x_end;
 	double y_end;
 
-	public MLigne(double x, double y) {
+	public MLigne(double x, double y, Color c) {
 		super(x, y);
 		x_end = 0;
 		y_end = 0;
+		this.color = c;
 	}
 
 	public MLigne(double x, double y, double ox, double oy, Color c) {
