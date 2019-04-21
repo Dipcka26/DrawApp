@@ -47,6 +47,17 @@ public class Brush {
 		}
 	}
 	
+	public String toString() {
+		String ret = "BRUSH: " + '\n';
+		for (int i  = 0; i < this.numberofElements(); i++) {
+			ret += this.x_koordinates.get(i) + " " + this.y_koordinates.get(i) + " " + this.colors.get(i).toString();
+			//we put one point separator, in this way we can split each point from brush when we were loading
+			ret += ','; 
+		}
+		
+		return ret;
+	}
+	
 	
 	
 }

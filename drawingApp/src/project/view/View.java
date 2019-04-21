@@ -1,5 +1,7 @@
 package project.view;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -14,6 +16,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import project.controller.Control;
 import javafx.event.EventHandler;
@@ -54,6 +57,18 @@ public class View extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+	
+	
+	public File fileChooserOption(Stage stage) {
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("File");
+		File file = fileChooser.showOpenDialog(stage);
+		
+		return file;		 
+		 
+	}
+	
 	
 	public void addToolbar(BorderPane pane, Control control) {
 	
