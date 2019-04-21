@@ -1,6 +1,7 @@
 package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class MRectangle extends Shape {
 
@@ -10,6 +11,13 @@ public class MRectangle extends Shape {
 		super(x, y);
 		this.larg = larg;
 		this.haut = haut;
+	}
+
+	public MRectangle(double x, double y, double ox, double oy, Color c) {
+		super(x, y);
+		this.larg = ox;
+		this.haut = oy;
+		this.color = c;
 	}
 
 	public double getLargeur() {

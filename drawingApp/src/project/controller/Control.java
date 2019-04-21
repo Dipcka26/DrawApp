@@ -4,11 +4,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -166,6 +169,7 @@ public class Control {
 		switch (MODUS) {
 
 		case LOAD_FILE:
+			load();
 			break;
 		case SAVE_FILE:
 			save();
@@ -233,24 +237,16 @@ public class Control {
 
 	}
 
-	public void save()  {
+	public void save() {
 		File file = chooseFile();
 		String toSave = toString();
-		System.out.println(file.toString());
-		
+
 		if (file != null) {
 			try {
 				FileWriter openedFile = new FileWriter(file);
 				openedFile.write(toSave);
-				System.out.println(toSave);
-				//PrintWriter pw = new PrintWriter(openedFile);
-				//String[] s = toSave.split("\n");
-				/*for(int i = 0; i < s.length; i++) {
-					pw.println("pepe esto no furula ");
-				}*/
-				System.out.println("Heeeeellooo");
 				openedFile.close();
-				
+
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -261,26 +257,101 @@ public class Control {
 		}
 
 	}
-	
+
 	public File chooseFile() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("File");
 		File file = fileChooser.showOpenDialog(null);
-		
+
 		return file;
 	}
+
 	public String toString() {
-		String saved  ="";
-		for(int i = 0; i < this.model.getSize(); i++) {
+		String saved = "";
+		for (int i = 0; i < this.model.getSize(); i++) {
 			saved += this.model.get(i).toString() + '\n';
-			
+
 		}
 		saved += this.brush.toString();
-		
+
 		return saved;
 	}
 
 	public void load() {
+		reset();
+		File file = chooseFile();
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			String line;
+			while ((line = br.readLine()) != null) {
+
+				String[] readed = line.split(" ");
+				if (readed[0].equalsIgnoreCase("CIRCLE:")) {
+					model.add(circleParser(readed));
+				} else if (readed[0].equalsIgnoreCase("RECTANGLE:")) {
+					model.add(rectParser(readed));
+				} else if (readed[0].equalsIgnoreCase("LINE:")) {
+					model.add(lineParser(readed));
+				} else if (readed[0].equalsIgnoreCase("BRUSH:")) {
+					line = br.readLine();
+					this.brush = brushParser(line);
+				}
+
+			}
+			this.draw();
+
+		} catch (FileNotFoundException e) {
+			System.out.println(" File not Found ");
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 
 	}
+
+	private Brush brushParser(String s) throws IOException {
+		Brush brush = new Brush();
+		String[] readed = s.split(",");
+		for (int i = 0; i < readed.length; i++) {
+			String[] point = readed[i].split(" ");
+			int x = Integer.parseInt(point[0]), y = Integer.parseInt(point[1]);
+			Color c = Color.valueOf(point[2]);
+			brush.fill_brush(x, y, c);
+		}
+
+		return brush;
+
+	}
+
+	public MDisque circleParser(String[] s) {
+		double x, y, radius;
+		Color c = Color.valueOf(s[4]);
+		x = Double.parseDouble(s[1]);
+		y = Double.parseDouble(s[2]);
+		radius = Double.parseDouble(s[3]);
+		return new MDisque(x, y, radius, c);
+	}
+
+	public MRectangle rectParser(String[] s) {
+		double x, y, ox, oy;
+		Color c = Color.valueOf(s[5]);
+		x = Double.parseDouble(s[1]);
+		y = Double.parseDouble(s[2]);
+		ox = Double.parseDouble(s[3]);
+		oy = Double.parseDouble(s[4]);
+		return new MRectangle(x, y, ox, oy, c);
+	}
+
+	public MLigne lineParser(String[] s) {
+		double x, y, ox, oy;
+		Color c = Color.valueOf(s[5]);
+		x = Double.parseDouble(s[1]);
+		y = Double.parseDouble(s[2]);
+		ox = Double.parseDouble(s[3]);
+		oy = Double.parseDouble(s[4]);
+		return new MLigne(x, y, ox, oy, c);
+	}
+
 }

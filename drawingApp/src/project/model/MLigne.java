@@ -1,6 +1,7 @@
 package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class MLigne extends Shape {
 
@@ -11,6 +12,13 @@ public class MLigne extends Shape {
 		super(x, y);
 		x_end = 0;
 		y_end = 0;
+	}
+
+	public MLigne(double x, double y, double ox, double oy, Color c) {
+		super(x, y);
+		x_end = ox;
+		y_end = oy;
+		this.color = c;
 	}
 
 	public void set_endX(double x_set) {

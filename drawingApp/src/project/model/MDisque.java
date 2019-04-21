@@ -1,6 +1,7 @@
 package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class MDisque extends Shape {
 
@@ -9,6 +10,12 @@ public class MDisque extends Shape {
 	public MDisque(double x, double y, double rayon) {
 		super(x, y);
 		this.rayon = rayon;
+	}
+
+	public MDisque(double x, double y, double radius, Color c) {
+		super(x, y);
+		this.rayon = radius;
+		this.color = c;
 	}
 
 	public double getRayon() {
