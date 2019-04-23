@@ -337,8 +337,9 @@ public class Control {
 		for (int i = 0; i < readed.length; i++) {
 			String[] point = readed[i].split(" ");
 			int x = Integer.parseInt(point[0]), y = Integer.parseInt(point[1]);
-			Color c = Color.valueOf(point[2]);
-			brush.fill_brush(x, y, c); //TODO
+			double w = Double.parseDouble(point[2]);
+			Color c = Color.valueOf(point[3]);
+			brush.fill_brush(x, y, c, w); //TODO
 		}
 
 		return brush;
