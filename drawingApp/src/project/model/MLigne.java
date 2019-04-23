@@ -2,6 +2,7 @@ package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import project.controller.Control;
 
 public class MLigne extends Shape {
 
@@ -41,8 +42,12 @@ public class MLigne extends Shape {
 	}
 
 	public void draw(GraphicsContext gc) {
+		
+		double old_width = gc.getLineWidth();
+		gc.setLineWidth(Control.BRUSH_WIDTH);
 		gc.setStroke(this.color);
 		gc.strokeLine(x, y, x_end, y_end);
+		gc.setLineWidth(old_width);
 	}
 
 	@Override
