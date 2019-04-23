@@ -39,7 +39,7 @@ public class View extends Application {
 
 		control.draw();
 		
-		Scene scene = new Scene(pane,900, 1050);
+		Scene scene = new Scene(pane,900,1050);
 		
 		 
 		 drawArea.setOnMousePressed(e -> control.attrape(e));
@@ -84,7 +84,7 @@ public class View extends Application {
 	 
 	 
 	 //FOr the width of the brush! 
-	 ChoiceBox choiceBox = new ChoiceBox();
+	 ChoiceBox<String> choiceBox = new ChoiceBox<String>();
 
      choiceBox.getItems().add("Width 1");
      choiceBox.getItems().add("Width 2");
@@ -120,7 +120,7 @@ public class View extends Application {
 	 control.setColorPicker(colorPicker);
 	 colorPicker.getStyleClass().add("button");
 	 colorPicker.setOnAction(e -> control.changeMenu(e, Control.CHANGE_COLOR));
-	// control.setColor(Color.RED);
+	 control.setColor(Color.BLACK);
 	 
 	 
 	 //Add all components

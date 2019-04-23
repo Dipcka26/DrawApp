@@ -96,7 +96,7 @@ public class Control {
 				model.add(new MDisque(e.getX(), e.getY(), 0,getColor()));
 			else if (LIGNE == object_type)
 				model.add(new MLigne(e.getX(), e.getY(),getColor()));
-		} else if( modi == MOVE_OBJECT || modi == FILL_OBJECT  || modi == DELETE_OBJECT){
+		} else if( modi == MOVE_OBJECT || modi == FILL_OBJECT  || modi == DELETE_OBJECT || modi == RESIZE_OBJECT){
 			for (int i = 0; i < model.getSize(); i++) {
 				Shape f = model.get(i);
 				if (f.estDedans(e.getX(), e.getY())) {
@@ -125,7 +125,7 @@ public class Control {
 
 	public void deplace(MouseEvent e) {
 
-		if (draw_object || modi == RESIZE_OBJECT) {
+		if (draw_object || (modi == RESIZE_OBJECT && formeIdx != -1)) {
 			if (RECTANGLE == object_type) {
 				MRectangle rec;
 				if (modi == RESIZE_OBJECT) {
@@ -154,8 +154,28 @@ public class Control {
 				lig.set_endY(e.getY());
 			}
 		} else if (enDeplacement && brush_activated == false && modi == MOVE_OBJECT) {
-			model.get(formeIdx).setX(e.getX());
-			model.get(formeIdx).setY(e.getY());
+			
+			if(model.get(formeIdx) instanceof MLigne) {
+				MLigne lig = (MLigne) model.get(formeIdx);
+				
+				
+//				double x = lig.getX();
+//				double y = lig.getY();
+				
+				lig.setX(e.getX());
+				lig.setY(e.getY());
+				
+				lig.set_endX(lig.get_endX() + lig.getX());
+				lig.set_endY(lig.get_endY() + lig.getY());
+		
+			
+			}
+			else {
+				model.get(formeIdx).setX(e.getX());
+				model.get(formeIdx).setY(e.getY());
+			}
+			
+			
 		} else if (brush_activated)
 			brush.fill_brush((int) e.getX(), (int) e.getY(), this.getColor(), gc.getLineWidth());
 		
@@ -346,7 +366,7 @@ public class Control {
 			int x = Integer.parseInt(point[0]), y = Integer.parseInt(point[1]);
 			double w = Double.parseDouble(point[2]);
 			Color c = Color.valueOf(point[3]);
-			brush.fill_brush(x, y, c, w); //TODO
+			brush.fill_brush(x, y, c, w); 
 		}
 
 		return brush;

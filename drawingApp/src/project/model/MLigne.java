@@ -30,7 +30,12 @@ public class MLigne extends Shape {
 	public void set_endY(double y_set) {
 		y_end = y_set;
 	}
-
+	public double get_endX() {
+		return x_end;
+	}
+	public double get_endY() {
+		return y_end;
+	}
 	// https://stackoverflow.com/questions/17692922/check-is-a-point-x-y-is-between-two-points-drawn-on-a-straight-line
 	public boolean estDedans(double x_between, double y_between) {
 
