@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import project.controller.Control;
 import javafx.event.EventHandler;
+import javafx.scene.control.ChoiceBox;
 
 public class View extends Application {
 
@@ -27,7 +28,7 @@ public class View extends Application {
 		
 		primaryStage.setTitle("Drawing app");
 
-		Canvas drawArea = new Canvas(750, 800);
+		Canvas drawArea = new Canvas(850, 1000);
 
 		GraphicsContext gc = drawArea.getGraphicsContext2D();
 		Control control = new Control(gc, drawArea.getWidth(), drawArea.getHeight());
@@ -38,7 +39,7 @@ public class View extends Application {
 
 		control.draw();
 		
-		Scene scene = new Scene(pane,750, 800);
+		Scene scene = new Scene(pane,850, 1000);
 		
 		 
 		 drawArea.setOnMousePressed(e -> control.attrape(e));
@@ -78,6 +79,21 @@ public class View extends Application {
 	 move_object.setOnMouseClicked(e -> control.changeMenu(e, Control.MOVE_OBJECT));
 	 reset_all.setOnMouseClicked(e->control.changeMenu(e,Control.RESET));
 	 resize_object.setOnMouseClicked(e->control.changeMenu(e, Control.RESIZE_OBJECT));
+	 
+	 
+	 //FOr the width of the brush! 
+	 ChoiceBox choiceBox = new ChoiceBox();
+
+     choiceBox.getItems().add("Width 1");
+     choiceBox.getItems().add("Width 2");
+     choiceBox.getItems().add("Width 3");
+     choiceBox.getItems().add("Width 4");
+     choiceBox.getItems().add("Width 5");
+     choiceBox.setValue("Width 1");
+
+     choiceBox.setOnAction(e->control.setWidth(e, (String) choiceBox.getValue()));
+	 
+	 
 	 //Add Menu Fill Objects
 	 Menu menu = new Menu("Choose Form");
 	
@@ -108,13 +124,19 @@ public class View extends Application {
 	 //Add all components
 	 toolBar.getItems().add(save_file);
 	 toolBar.getItems().add(load_file);
+	 
 	 toolBar.getItems().add(brush);
+	 toolBar.getItems().add(choiceBox);
+	 
 	 toolBar.getItems().add(fill_object);
 	 toolBar.getItems().add(move_object);
 	 toolBar.getItems().add(resize_object);
 	 toolBar.getItems().add(menuBar);
 	 toolBar.getItems().add(colorPicker); 
 	 toolBar.getItems().add(reset_all);
+	 
+	 
+	 
 	 pane.setTop(toolBar);
 	 
 	}

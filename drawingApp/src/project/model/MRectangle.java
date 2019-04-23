@@ -2,6 +2,7 @@ package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import project.controller.Control;
 
 public class MRectangle extends Shape {
 
@@ -45,8 +46,11 @@ public class MRectangle extends Shape {
 			gc.setFill(this.color);
 			gc.fillRect(this.x, this.y, this.larg, this.haut);
 		} else {
+			double width = gc.getLineWidth();
+			gc.setLineWidth(Control.BRUSH_WIDTH);
 			gc.setStroke(this.color);
 			gc.strokeRect(this.x, this.y, this.larg, this.haut);
+			gc.setLineWidth(width);
 		}
 	}
 

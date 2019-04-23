@@ -2,6 +2,7 @@ package project.model;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import project.controller.Control;
 
 public class MDisque extends Shape {
 
@@ -37,8 +38,11 @@ public class MDisque extends Shape {
 			gc.setFill(this.color);
 			gc.fillOval(this.x, this.y, 2 * this.rayon, 2 * this.rayon);
 		} else {
+			double width = gc.getLineWidth();
+			gc.setLineWidth(Control.BRUSH_WIDTH);
 		    gc.setStroke(this.color);
 			gc.strokeOval(this.x, this.y, 2 * this.rayon, 2 * this.rayon);
+			gc.setLineWidth(width);
 		}
 	}
 

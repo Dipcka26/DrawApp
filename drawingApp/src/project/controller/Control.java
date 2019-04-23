@@ -35,13 +35,15 @@ public class Control {
 	private boolean brush_activated = false;
 	private int object_type = 0; // RECTANCLE; DISQUE; LIGNE
 	private int modi = -1; // Tells which option the user choosed
-
-	private double BRUSH_WIDTH = 5;
+	
+	public static final double BRUSH_WIDTH = 5; //STANDART 5 
 	
 	public static final int LOAD_FILE = 0;
 	public static final int SAVE_FILE = 1;
 	public static final int BRUSH = 2;
 
+	
+	
 	public static final int CHANGE_COLOR = 3;
 	public static final int FILL_OBJECT = 4;
 	public static final int MOVE_OBJECT = 5;
@@ -66,6 +68,7 @@ public class Control {
 
 	public void init() {
 		gc.setLineWidth(BRUSH_WIDTH);
+		
 		
 	}
 
@@ -152,7 +155,7 @@ public class Control {
 			model.get(formeIdx).setX(e.getX());
 			model.get(formeIdx).setY(e.getY());
 		} else if (brush_activated)
-			brush.fill_brush((int) e.getX(), (int) e.getY(), this.getColor());
+			brush.fill_brush((int) e.getX(), (int) e.getY(), this.getColor(), gc.getLineWidth());
 
 		this.draw();
 
@@ -335,7 +338,7 @@ public class Control {
 			String[] point = readed[i].split(" ");
 			int x = Integer.parseInt(point[0]), y = Integer.parseInt(point[1]);
 			Color c = Color.valueOf(point[2]);
-			brush.fill_brush(x, y, c);
+			brush.fill_brush(x, y, c); //TODO
 		}
 
 		return brush;
@@ -371,4 +374,20 @@ public class Control {
 		return new MLigne(x, y, ox, oy, c);
 	}
 
+	public void setWidth(Event e, String value) {
+		System.out.println(value + " Stringvalue");
+		
+		
+		if(value.equals("Width 1"))
+			gc.setLineWidth(3);
+		else if(value.equals("Width 2"))
+			gc.setLineWidth(6);
+		else if(value.equals("Width 3"))
+			gc.setLineWidth(9);
+		else if(value.equals("Width 4"))
+			gc.setLineWidth(12);
+		else if(value.equals("Width 5"))
+			gc.setLineWidth(15);
+		
+	}
 }

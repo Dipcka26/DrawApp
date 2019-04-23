@@ -11,18 +11,23 @@ public class Brush {
 	List<Integer> x_koordinates; 
 	List<Integer> y_koordinates;
 	List<Color>   colors;
+	List<Double> brush_width;
+	
 	int sizeof_elements;
 	public Brush() 
 	{
 		x_koordinates = new ArrayList<>();
 		y_koordinates = new ArrayList<>();
 		colors= new ArrayList<>();
+		brush_width = new ArrayList<>();
+		
 		sizeof_elements = 0;
 	}
 	
-	public void fill_brush(int x, int y, Color c) {
+	public void fill_brush(int x, int y, Color c, double b_width) {
 		x_koordinates.add(x);
 		y_koordinates.add(y);
+		this.brush_width.add(b_width);
 		colors.add(c);
 		sizeof_elements++;
 	}
@@ -36,15 +41,17 @@ public class Brush {
 		
 		int x;
 		int y;
-		
+		double old_width = gc.getLineWidth();
 		for(int i = 0; i < sizeof_elements;i++) {
 			Color c = colors.get(i);
 			x = x_koordinates.get(i);
 			y = y_koordinates.get(i);
+			gc.setLineWidth(brush_width.get(i));
 			gc.setStroke(c);
 		//	gc.setLineWidth(10);
 			gc.strokeLine(x, y, x, y);
 		}
+		gc.setLineWidth(old_width);
 	}
 	
 	public String toString() {
