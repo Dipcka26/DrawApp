@@ -28,7 +28,7 @@ public class View extends Application {
 		
 		primaryStage.setTitle("Drawing app");
 
-		Canvas drawArea = new Canvas(850, 1000);
+		Canvas drawArea = new Canvas(900, 1050);
 
 		GraphicsContext gc = drawArea.getGraphicsContext2D();
 		Control control = new Control(gc, drawArea.getWidth(), drawArea.getHeight());
@@ -39,7 +39,7 @@ public class View extends Application {
 
 		control.draw();
 		
-		Scene scene = new Scene(pane,850, 1000);
+		Scene scene = new Scene(pane,900, 1050);
 		
 		 
 		 drawArea.setOnMousePressed(e -> control.attrape(e));
@@ -71,6 +71,7 @@ public class View extends Application {
 	 Button move_object = new Button ("Move");
 	 Button reset_all = new Button("Reset");
 	 Button resize_object = new Button("Resize");
+	 Button delete_object = new Button("Delete");
 	 
 	 brush.setOnMouseClicked(e -> control.changeMenu(e, Control.BRUSH));
 	 save_file.setOnMouseClicked(e -> control.changeMenu(e, Control.SAVE_FILE));
@@ -79,6 +80,7 @@ public class View extends Application {
 	 move_object.setOnMouseClicked(e -> control.changeMenu(e, Control.MOVE_OBJECT));
 	 reset_all.setOnMouseClicked(e->control.changeMenu(e,Control.RESET));
 	 resize_object.setOnMouseClicked(e->control.changeMenu(e, Control.RESIZE_OBJECT));
+	 delete_object.setOnMouseClicked(e->control.changeMenu(e,Control.DELETE_OBJECT));
 	 
 	 
 	 //FOr the width of the brush! 
@@ -131,6 +133,7 @@ public class View extends Application {
 	 toolBar.getItems().add(fill_object);
 	 toolBar.getItems().add(move_object);
 	 toolBar.getItems().add(resize_object);
+	 toolBar.getItems().add(delete_object);
 	 toolBar.getItems().add(menuBar);
 	 toolBar.getItems().add(colorPicker); 
 	 toolBar.getItems().add(reset_all);

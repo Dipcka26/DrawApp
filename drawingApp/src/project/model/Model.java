@@ -22,4 +22,7 @@ public class Model {
 		tab.add(f);
 	}
 
+	public void delete(int i) {
+		tab.remove(i);
+	}
 }

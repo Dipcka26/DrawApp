@@ -26,7 +26,7 @@ public class Control {
 	private double cWidth, cHeight;// Hauteur, largeur du Canvas
 	private Model model;
 	private Brush brush;
-	private int formeIdx;
+	private int formeIdx = -1;
 	private boolean enDeplacement = false;
 	private ColorPicker colorPicker;
 	private FileChooser fc;
@@ -49,7 +49,7 @@ public class Control {
 	public static final int MOVE_OBJECT = 5;
 	public static final int RESET = 6;
 	public static final int RESIZE_OBJECT = 7;
-
+	public static final int DELETE_OBJECT = 8;
 	public static final int RECTANGLE = 10;
 	public static final int LIGNE = 11;
 	public static final int CERCLE = 12;
@@ -96,7 +96,7 @@ public class Control {
 				model.add(new MDisque(e.getX(), e.getY(), 0,getColor()));
 			else if (LIGNE == object_type)
 				model.add(new MLigne(e.getX(), e.getY(),getColor()));
-		} else if( modi == MOVE_OBJECT || modi == FILL_OBJECT){
+		} else if( modi == MOVE_OBJECT || modi == FILL_OBJECT  || modi == DELETE_OBJECT){
 			for (int i = 0; i < model.getSize(); i++) {
 				Shape f = model.get(i);
 				if (f.estDedans(e.getX(), e.getY())) {
@@ -111,6 +111,8 @@ public class Control {
 						object_type = LIGNE;
 					if (modi == FILL_OBJECT)
 						f.setFilled(true);
+					if(modi == DELETE_OBJECT)
+						model.delete(i);
 					break;
 				}
 			}
@@ -156,6 +158,7 @@ public class Control {
 			model.get(formeIdx).setY(e.getY());
 		} else if (brush_activated)
 			brush.fill_brush((int) e.getX(), (int) e.getY(), this.getColor(), gc.getLineWidth());
+		
 
 		this.draw();
 
@@ -164,6 +167,7 @@ public class Control {
 	public void lache(MouseEvent e) {
 		enDeplacement = false;
 		draw_object = false;
+		formeIdx = -1;
 	}
 
 	/*
@@ -213,6 +217,9 @@ public class Control {
 		case RESIZE_OBJECT:
 			draw();
 			break; // TODO
+		case DELETE_OBJECT:
+			draw();
+			break;
 
 		}
 	}
