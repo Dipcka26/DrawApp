@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.Event;
 import project.model.*;
 
@@ -344,7 +346,8 @@ public class Control {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
 			String line;
-			while ((line = br.readLine()) != null) {
+			boolean correct = true;
+			while ((line = br.readLine()) != null && correct) {
 
 				String[] readed = line.split(" ");
 				if (readed[0].equalsIgnoreCase("CIRCLE:")) {
@@ -356,10 +359,16 @@ public class Control {
 				} else if (readed[0].equalsIgnoreCase("BRUSH:")) {
 					line = br.readLine();
 					this.brush = brushParser(line);
+				} else {
+					JOptionPane.showMessageDialog(null, "Corrupt File");
+					System.out.println("Corrupt file");
+					correct = false;
+					
 				}
 
 			}
-			this.draw();
+			if (correct) this.draw();
+			else reset();
 
 		} catch (FileNotFoundException e) {
 			System.out.println(" File not Found ");
