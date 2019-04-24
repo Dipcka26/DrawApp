@@ -91,9 +91,9 @@ public class Control {
 		if (draw_object) { // This code will be executed if we wanne creat a new object
 			enDeplacement = true;
 			if (RECTANGLE == object_type)
-				model.add(new MRectangle(e.getX(), e.getY(), 0, 0, getColor()));
+				model.add(new MRectangle(e.getX(), e.getY(), 0, 0, getColor(), false));
 			else if (CERCLE == object_type)
-				model.add(new MDisque(e.getX(), e.getY(), 0,getColor()));
+				model.add(new MDisque(e.getX(), e.getY(), 0,getColor(), false));
 			else if (LIGNE == object_type)
 				model.add(new MLigne(e.getX(), e.getY(),getColor()));
 		} else if( modi == MOVE_OBJECT || modi == FILL_OBJECT  || modi == DELETE_OBJECT || modi == RESIZE_OBJECT){
@@ -379,7 +379,10 @@ public class Control {
 		x = Double.parseDouble(s[1]);
 		y = Double.parseDouble(s[2]);
 		radius = Double.parseDouble(s[3]);
-		return new MDisque(x, y, radius, c);
+		boolean filled = Boolean.parseBoolean(s[5]);
+		return new MDisque(x, y, radius, c, filled);
+		
+
 	}
 
 	public MRectangle rectParser(String[] s) {
@@ -389,7 +392,8 @@ public class Control {
 		y = Double.parseDouble(s[2]);
 		ox = Double.parseDouble(s[3]);
 		oy = Double.parseDouble(s[4]);
-		return new MRectangle(x, y, ox, oy, c);
+		boolean f = Boolean.parseBoolean(s[6]);
+		return new MRectangle(x, y, ox, oy, c, f);
 	}
 
 	public MLigne lineParser(String[] s) {

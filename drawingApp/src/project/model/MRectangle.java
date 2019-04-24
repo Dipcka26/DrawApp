@@ -8,17 +8,19 @@ public class MRectangle extends Shape {
 
 	private double larg, haut;
 
-	public MRectangle(double x, double y, double larg, double haut) {
+	public MRectangle(double x, double y, double larg, double haut, boolean f) {
 		super(x, y);
 		this.larg = larg;
 		this.haut = haut;
+		this.filled = f;
 	}
 
-	public MRectangle(double x, double y, double ox, double oy, Color c) {
+	public MRectangle(double x, double y, double ox, double oy, Color c, boolean f) {
 		super(x, y);
 		this.larg = ox;
 		this.haut = oy;
 		this.color = c;
+		this.filled = f;
 	}
 
 	public double getLargeur() {
@@ -57,7 +59,7 @@ public class MRectangle extends Shape {
 	@Override
 	public String toString() {
 		String data = "RECTANGLE: ";
-		data += this.x + " " + this.y + " " + this.larg + " " + this.haut + " " + this.color.toString();
+		data += this.x + " " + this.y + " " + this.larg + " " + this.haut + " " + this.color.toString() + " " + this.filled;
 		return data;
 	}
 
