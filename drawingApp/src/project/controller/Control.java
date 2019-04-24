@@ -156,7 +156,7 @@ public class Control {
 			}
 		} else if (enDeplacement && brush_activated == false && modi == MOVE_OBJECT) {
 			
-			//Moving a ligne 
+			//Moving a line 
 			if(model.get(formeIdx) instanceof MLigne) {
 				MLigne lig = (MLigne) model.get(formeIdx);
 				
@@ -186,7 +186,7 @@ public class Control {
 			
 						
 			
-			}//Resizing a ligne
+			}//Resizing a line
 			else {
 				model.get(formeIdx).setX(e.getX());
 				model.get(formeIdx).setY(e.getY());
