@@ -126,7 +126,7 @@ public class Control {
 	}
 
 	public void deplace(MouseEvent e) {
-
+		//formeIdx!=-1 means, no object has been found 
 		if (draw_object || (modi == RESIZE_OBJECT && formeIdx != -1)) {
 			if (RECTANGLE == object_type) {
 				MRectangle rec;
@@ -150,8 +150,7 @@ public class Control {
 					lig = (MLigne) model.get(formeIdx);
 				else
 					lig = (MLigne) model.get(model.getSize() - 1);
-				// lig.setX(e.getX() - lig.getX());
-				// lig.setY(e.getY() - lig.getY());
+
 				lig.set_endX(e.getX());
 				lig.set_endY(e.getY());
 			}
@@ -248,13 +247,13 @@ public class Control {
 			break;
 		case MOVE_OBJECT:
 			draw();
-			break; // TODO
+			break; 
 		case FILL_OBJECT:
-			setFillObject();
-			break; // TODO
+			draw();
+			break; 
 		case RESIZE_OBJECT:
 			draw();
-			break; // TODO
+			break; 
 		case DELETE_OBJECT:
 			draw();
 			break;
@@ -278,7 +277,6 @@ public class Control {
 	public void addObject(int typeof_object) {
 
 		draw_object = true;
-		// enDeplacement = true;
 		object_type = typeof_object;
 	}
 
@@ -292,10 +290,6 @@ public class Control {
 		brush_activated = true;
 	}
 
-	public void setFillObject() {
-
-	}
-
 	public void save() {
 		File file = chooseFile();
 		String toSave = toString();
@@ -307,10 +301,8 @@ public class Control {
 				openedFile.close();
 
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

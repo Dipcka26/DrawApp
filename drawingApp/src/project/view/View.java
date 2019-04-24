@@ -47,9 +47,7 @@ public class View extends Application {
 		 drawArea.setOnMouseReleased(e -> control.lache(e));
 		  
 		 drawArea.setOnMouseDragged(e -> control.deplace(e));
-		 
-		 //drawArea.setOnMousePressed(e -> control.drawObject(e));
-		 
+		 		 
 		 //Referenz https://stackoverflow.com/questions/20477187/use-existing-method-as-javafx-event-handler
 		 //	drawArea.setOnMousePressed(control::attrape);
 		 //	drawArea.setOnMouseReleased(control::lache);
@@ -83,7 +81,7 @@ public class View extends Application {
 	 delete_object.setOnMouseClicked(e->control.changeMenu(e,Control.DELETE_OBJECT));
 	 
 	 
-	 //FOr the width of the brush! 
+	 //Choicebox for the width of the brush! 
 	 ChoiceBox<String> choiceBox = new ChoiceBox<String>();
 
      choiceBox.getItems().add("Width 1");
