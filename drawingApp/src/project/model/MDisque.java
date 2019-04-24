@@ -13,10 +13,11 @@ public class MDisque extends Shape {
 		this.rayon = rayon;
 	}
 
-	public MDisque(double x, double y, double radius, Color c) {
+	public MDisque(double x, double y, double radius, Color c, boolean f) {
 		super(x, y);
 		this.rayon = radius;
 		this.color = c;
+		this.filled = f;
 	}
 
 	public double getRayon() {
@@ -38,17 +39,17 @@ public class MDisque extends Shape {
 			gc.setFill(this.color);
 			gc.fillOval(this.x, this.y, 2 * this.rayon, 2 * this.rayon);
 		} else {
-			double width = gc.getLineWidth();
+			double old_width = gc.getLineWidth();
 			gc.setLineWidth(Control.BRUSH_WIDTH);
 		    gc.setStroke(this.color);
 			gc.strokeOval(this.x, this.y, 2 * this.rayon, 2 * this.rayon);
-			gc.setLineWidth(width);
+			gc.setLineWidth(old_width);
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "CIRCLE: " + this.x + " " + this.y + " " + this.rayon + " " + this.color.toString();
+		return "CIRCLE: " + this.x + " " + this.y + " " + this.rayon + " " + this.color.toString() + " " + this.filled;
 	}
 
 }
