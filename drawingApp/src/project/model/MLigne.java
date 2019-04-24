@@ -8,6 +8,9 @@ public class MLigne extends Shape {
 
 	double x_end;
 	double y_end;
+	//Initial value of the end points;
+	private double end_xini;
+	private double end_yini;
 
 	public MLigne(double x, double y, Color c) {
 		super(x, y);
@@ -23,12 +26,22 @@ public class MLigne extends Shape {
 		this.color = c;
 	}
 
+	public double get_iniEndX() {
+		return end_xini;
+	}
+	
+	public double get_iniEndY() {
+		return end_yini;
+	}
+	
 	public void set_endX(double x_set) {
 		x_end = x_set;
+		end_xini = x_end;
 	}
 
 	public void set_endY(double y_set) {
 		y_end = y_set;
+		end_yini = y_end;
 	}
 	public double get_endX() {
 		return x_end;

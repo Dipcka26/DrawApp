@@ -155,27 +155,37 @@ public class Control {
 			}
 		} else if (enDeplacement && brush_activated == false && modi == MOVE_OBJECT) {
 			
+			//Moving a ligne 
 			if(model.get(formeIdx) instanceof MLigne) {
 				MLigne lig = (MLigne) model.get(formeIdx);
-				
 				
 				double x = lig.getX();
 				double y = lig.getY();
 				
-				lig.setX(e.getX());
-				lig.setY(e.getY());
-				if(e.getX() > x) {
-					lig.set_endX(lig.get_endX() + e.getX());
-					lig.set_endY(lig.get_endY() + e.getY());
-			
+				if(lig.getX()< e.getX()) {
+					x = e.getX() - lig.getX();
+					lig.set_endX(lig.get_iniEndX() + x);
 				}
 				else {
-				lig.set_endX(lig.get_endX() - e.getX());
-				lig.set_endY(lig.get_endY() - e.getY());
-
+					x = lig.getX() - e.getX();
+					lig.set_endX(lig.get_iniEndX() - x);
 				}
+				
+				if(lig.getY() > e.getY()) {
+					y = e.getY() - lig.getY();
+					lig.set_endY(lig.get_iniEndY()+ y);
+				}
+				else {
+					y = lig.getY() - e.getY();
+					lig.set_endY(lig.get_iniEndY()- y);
+				}
+				
+				lig.setX(e.getX());
+				lig.setY(e.getY());
 			
-			}
+						
+			
+			}//Resizing a ligne
 			else {
 				model.get(formeIdx).setX(e.getX());
 				model.get(formeIdx).setY(e.getY());
