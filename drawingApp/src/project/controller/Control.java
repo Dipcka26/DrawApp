@@ -159,15 +159,21 @@ public class Control {
 				MLigne lig = (MLigne) model.get(formeIdx);
 				
 				
-//				double x = lig.getX();
-//				double y = lig.getY();
+				double x = lig.getX();
+				double y = lig.getY();
 				
 				lig.setX(e.getX());
 				lig.setY(e.getY());
-				
-				lig.set_endX(lig.get_endX() + lig.getX());
-				lig.set_endY(lig.get_endY() + lig.getY());
-		
+				if(e.getX() > x) {
+					lig.set_endX(lig.get_endX() + e.getX());
+					lig.set_endY(lig.get_endY() + e.getY());
+			
+				}
+				else {
+				lig.set_endX(lig.get_endX() - e.getX());
+				lig.set_endY(lig.get_endY() - e.getY());
+
+				}
 			
 			}
 			else {
